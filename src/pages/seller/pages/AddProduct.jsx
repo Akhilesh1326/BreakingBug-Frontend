@@ -3,7 +3,8 @@ import { Box, CircularProgress, Stack, TextField } from '@mui/material';
 import Popup from '../../../components/Popup';
 import { BlueButton } from '../../../utils/buttonStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { addStuff } from '../../../redux/userHandle';
+//NOT BUG suggestion no need for below import
+// import { addStuff } from '../../../redux/userHandle';
 import altImage from "../../../assets/altimg.png";
 import styled from 'styled-components';
 

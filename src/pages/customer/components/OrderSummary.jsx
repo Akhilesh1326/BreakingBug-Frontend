@@ -23,7 +23,8 @@ const OrderSummary = ({ handleNext, handleBack }) => {
             dispatch(fetchProductDetailsFromCart(productID));
         }else
             return(handleNext)
-    }, [productID, dispatch]);
+        //BUG ALERT warning of not using handleNext
+    }, [productID, dispatch, handleNext]);
 
     let cartDetails = currentUser.cartDetails;
     let shippingData = currentUser.shippingData;
