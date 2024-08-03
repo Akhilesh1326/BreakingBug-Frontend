@@ -11,8 +11,8 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useSelector } from 'react-redux';
 
 const SideBar = () => {
-
-    
+    // BUG ALERT object variable not defined for useLocation
+    const location = useLocation();
 
     const { currentRole } = useSelector(state => state.user);
 

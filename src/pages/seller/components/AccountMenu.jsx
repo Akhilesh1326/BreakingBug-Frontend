@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// useEffect is not imported
+import React, { useState, useEffect } from 'react';
 import { Box, Avatar, Menu, MenuItem, ListItemIcon, Divider, IconButton, Tooltip } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';

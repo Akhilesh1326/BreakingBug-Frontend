@@ -38,8 +38,8 @@ const Navbar = () => {
             console.log(currentUser);
             dispatch(updateCustomer(currentUser, currentUser._id));
         }
-    }, [currentRole, currentUser, dispatch, ancorElNav])
-
+    }, [currentRole, currentUser, dispatch])
+//BUG ALERT typo
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [anchorElSign, setAnchorElSign] = React.useState(null);
@@ -50,16 +50,18 @@ const Navbar = () => {
     const [isCartOpen, setIsCartOpen] = React.useState(false);
 
     // Cart
-    const handleOpen Cart = () => {
+    //BUG ALERT typo found
+    const handleOpenCart = () => {
         setIsCartOpen(true);
     };
-
-    const handleOpenCart = () => {
+    //BUG ALERT same name declaration of the functions
+    const handleCloseCart = () => {
         setIsCartOpen(false);
     };
+    
 
     // Navigation Menu
-    const handleOpenNavMenu = (event) => {
+    const handleOpenNavMenu = (event) => {   
         setAnchorElNav(event.currentTarget);
     };
 

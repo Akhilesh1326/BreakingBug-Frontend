@@ -1,8 +1,8 @@
 import React from "react";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide  } from "@mui/material";
 import { GreenButton, RedButton } from "../utils/buttonStyles";
-
-const AlertDialogSlide = ({ dialog, showDialog, setShowDialog }) => {
+//BUG ALERT added new taskhandler to prop
+const AlertDialogSlide = ({ dialog, showDialog, setShowDialog, taskHandler }) => {
     const handleClose = () => {
         setShowDialog(false);
     };
@@ -27,9 +27,10 @@ const AlertDialogSlide = ({ dialog, showDialog, setShowDialog }) => {
                 </div>
                 <div>
                     <RedButton onClick={() => {
-                        handleClose()
-                        taskHandler()
-                    }}>Yes</RedButton>
+                        handleClose();
+                        taskHandler(); // Call taskHandler when Yes is clicked
+                    }}>
+                        Yes</RedButton>
                 </div>
             </DialogActions>
         </Dialog>

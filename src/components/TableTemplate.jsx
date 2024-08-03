@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {Table, TableBody, TableCell, TableContainer, TableRow, styled} from '@mui/material';
+// BUG ALERT not imported tableCellClasses 
+import {Table, TableBody, TableCell, TableContainer, TableRow, styled, tableCellClasses} from '@mui/material';
 
 const TableTemplate = ({columns, rows}) => {
   const [page, setPage] = useState(0);
@@ -33,14 +34,16 @@ const TableTemplate = ({columns, rows}) => {
                         <StyledTableCell key={column.Id} align={column.align}>
                           {
                             column.format && typeof value === 'number'
-                              ? column.format(id)
+                            //BUG ALERT Changed id to value 
+                              ? column.format(value) 
                               : value
                           }
                         </StyledTableCell>
                       );
-                    })}
+                    })}x
                     <StyledTableCell align="center">
-                      <ButtonHaver row={row}/>
+                      {/* //BUG ALERT small letterd componenet name */}
+                      <buttonHaver row={row} /> 
                     </StyledTableCell>
                   </StyledTableRow>
                 );

@@ -43,6 +43,10 @@ const ViewProductSeller = () => {
   const [dialog, setDialog] = useState("");
   const [showDialog, setShowDialog] = useState(false);
 
+  // BUG ALERT varible not define
+  const buttonText = showTab ? 'Cancel' : 'Edit';
+
+
   console.log(price);
 
   useEffect(() => {
@@ -289,17 +293,18 @@ const ViewProductSeller = () => {
                       Remove All Reviews
                     </DarkRedButton>}
                 </ReviewWritingContainer>
-
+ 
                 {productDetails.reviews && productDetails.reviews.length > 0 ? (
                   <ReviewContainer>
                     {productDetails.reviews.map((review, index) => (
                       <ReviewCard key={index}>
                         <ReviewCardDivision>
                           <Avatar sx={{ width: "60px", height: "60px", marginRight: "1rem", backgroundColor: generateRandomColor(review._id) }}>
-                            {String(reviewreviewername).charAt(0)}
+                            {/* BUG ALERT [.] opertor missing */}
+                            {String(review.reviewername).charAt(0)}
                           </Avatar>
                           <ReviewDetails>
-                            <Typography variant="h6">{reviewreviewername}</Typography>
+                            <Typography variant="h6">{review.reviewername}</Typography>
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
 
                               <Typography variant="body2">

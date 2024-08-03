@@ -8,19 +8,22 @@ import { useNavigate } from 'react-router-dom';
 import Popup from './Popup';
 import { addStuff } from '../redux/userHandle';
 
-const Products = ({}) => {
+const Products = ({ productData }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const itemsPerPage = 9;
 
-  const { currentRole, responseSearch } = useSelector();
+  const { currentRole, responseSearch } = useSelector(state => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
 
+  //BUG ALERT Calculate indices for current items
   const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem + itemsPerPage;
-  const currentItems = (indexOfFirstItem, indexOfLastItem);
+  // login mistake 
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // Corrected this line
+  const currentItems = productData.slice(indexOfFirstItem, indexOfLastItem); // Correctly slice the productData
 
   const handleAddToCart = (event, product) => {
     event.stopPropagation();
@@ -59,25 +62,20 @@ const Products = ({}) => {
               <PriceCost>₹{data.price.cost}</PriceCost>
               <PriceDiscount>{data.price.discountPercent}% off</PriceDiscount>
               <AddToCart>
-                {currentRole === "Customer" &&
-                  <>
-                    <BasicButton
-                      onClick={(event) => handleAddToCart(event, data)}
-                    >
-                      Add To Cart
-                    </BasicButton>
-                  </>
-                }
-                {currentRole === "Shopcart" &&
-                  <>
-                    <BasicButton
-                      onClick={(event) => handleUpload(event, data)}
-                    >
-                      Upload
-                    </BasicButton>
-                  </>
-                }
-
+                {currentRole === "Customer" && (
+                  <BasicButton
+                    onClick={(event) => handleAddToCart(event, data)}
+                  >
+                    Add To Cart
+                  </BasicButton>
+                )}
+                {currentRole === "Shopcart" && (
+                  <BasicButton
+                    onClick={(event) => handleUpload(event, data)}
+                  >
+                    Upload
+                  </BasicButton>
+                )}
               </AddToCart>
             </ProductContainer>
           </Grid>
@@ -86,10 +84,11 @@ const Products = ({}) => {
 
       <Container sx={{ mt: 10, mb: 10, display: "flex", justifyContent: 'center', alignItems: "center" }}>
         <Pagination
+
           count={Math.ceil(productData.length / itemsPerPage)}
           page={currentPage}
+          onChange={(event, value) => setCurrentPage(value)} // Add this line to handle page change
           color="secondary"
-
         />
       </Container>
 
@@ -100,6 +99,7 @@ const Products = ({}) => {
 
 export default Products;
 
+// Styled components
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;

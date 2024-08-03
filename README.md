@@ -53,6 +53,21 @@ Install the dependencies.
 ```bash
 npm install
 ```
+Install the nvm.
+[Refer nvm setup](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/)   
+```bash
+install nvm
+```
+Change the version of nvm.
+```bash
+nvm use 16
+```
+If still not working use 
+```bash
+npm audit fix --force
+npm install css-select@latest svgo@latest resolve-url-loader@latest
+
+```
 
 Create a `.env` file in the root directory of the project and add the following environment variables.
 ```bash

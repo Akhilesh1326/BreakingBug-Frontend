@@ -14,9 +14,9 @@ import Chart from 'react-apexcharts';
 import { ChartDatabyYear } from '../../../utils/chartData';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-const SalesChart = ({  }) => {
-
+//BUG ALERT no prope name is given
+const SalesChart = ({ type }) => {
+    
     const navigate = useNavigate();
 
     return (

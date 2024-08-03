@@ -27,10 +27,12 @@ const OrderSummary = ({ handleNext, handleBack }) => {
 
     let cartDetails = currentUser.cartDetails;
     let shippingData = currentUser.shippingData;
-
+    
     const totalQuantity = cartDetails.reduce((total, item) => total + item.quantity, 0);
     const totalOGPrice = cartDetails.reduce((total, item) => total + (item.quantity * item.price.mrp), 0);
     const totalNewPrice = cartDetails.reduce((total, item) => total + (item.quantity * item.price.cost), 0);
+    //BUG ALERT not initialized the totalamount variable and it's small logic to calculate it
+    const totalamount = totalNewPrice+totalQuantity+totalOGPrice;
 
     return (
         <React.Fragment>

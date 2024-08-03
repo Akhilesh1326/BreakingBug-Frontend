@@ -170,9 +170,38 @@ const userSlice = createSlice({
         },
 
         isTokenValid: (state) => {
-            const decodedToken = jwtDecode(state.currentToken);
-            if (state.currentToken) {              state.isLoggedIn = true;
+            if (state.currentToken) {
+                try {
+                    const decodedToken = jwtDecode(state.currentToken);
+                    const currentTime = Date.now() / 1000; // Convert to seconds
+        
+                    if (decodedToken.exp && decodedToken.exp > currentTime) {
+                        state.isLoggedIn = true;
+                    } else {
+                        // Token is expired
+                        localStorage.removeItem('user');
+                        state.currentUser = null;
+                        state.currentRole = null;
+                        state.currentToken = null;
+                        state.status = 'idle';
+                        state.response = null;
+                        state.error = null;
+                        state.isLoggedIn = false;
+                    }
+                } catch (error) {
+                    console.error("Invalid token:", error);
+                    // Handle invalid token by resetting the state
+                    localStorage.removeItem('user');
+                    state.currentUser = null;
+                    state.currentRole = null;
+                    state.currentToken = null;
+                    state.status = 'idle';
+                    state.response = null;
+                    state.error = null;
+                    state.isLoggedIn = false;
+                }
             } else {
+                // No token found, reset the state
                 localStorage.removeItem('user');
                 state.currentUser = null;
                 state.currentRole = null;
@@ -311,6 +340,10 @@ export const {
     removeAllFromCart,
     fetchProductDetailsFromCart,
     updateCurrentUser,
+    //BUG ALERT not export
+    getCustomersListFailed,
+    //BUG ALERT not export
+    setFilteredProducts,
     
 } = userSlice.actions;
 
