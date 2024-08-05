@@ -41,9 +41,6 @@ const ProductsMenu = ({ dropName }) => {
             self.findIndex((item) => item.subcategory === data.subcategory) === index
         );
     });
-    if (!Array.isArray(productData)) {
-        console.error("productData is not an array:", productData);
-    }
 
     const catHandler = (key) => {
         setAnchorEl(null);
